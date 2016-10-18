@@ -1,4 +1,8 @@
 require 'gosu'
+require_relative 'Modules/zorder'
+require_relative 'Classes/Player'
+require_relative 'Classes/Deck'
+require_relative 'Classes/Card'
 
 class GameWindow < Gosu::Window
 	def initialize
@@ -6,6 +10,17 @@ class GameWindow < Gosu::Window
 		self.caption = "Blackjack"
 
 		@background_image = Gosu::Image.new("Images/felt.png", :tileable => true)
+		@title = Gosu::Font.new(50)
+		@subtitle = Gosu::Font.new(30)
+		@money_message = Gosu::Font.new(25)
+		@dealer_message = Gosu::Font.new(40)
+		@player_message = Gosu::Font.new(40)
+
+		@player = Player.new(false, "test")
+		@dealer = Player.new(true)
+
+		@deck = Deck.new(5)
+		@deck_image = Gosu::Image.new("Images/back.png")
 	end
 
 	def new_game
@@ -13,17 +28,16 @@ class GameWindow < Gosu::Window
 	end
 
 	def title_screen
-		@background_image.draw(0,0,0)
-		welcome = Gosu::Image.from_text(self, "Welcome to Blackjack", "sans-serif", 50, 2, 500, :center)
-		welcome.draw(190, 150, 1)
-		start = Gosu::Image.from_text(self, "Press enter to start game!", "sans-serif", 30, 2, 400, :center)
-		start.draw(250, 320, 1)
+		@background_image.draw(0,0,ZOrder::Background, 1, 1, 0xaa_ffffff)
+		@title.draw("Welcome to Blackjack", 190, 150, ZOrder::UI, 1, 1, 0xff_ffff00)
+		@subtitle.draw("Press enter to start game!", 250, 320, ZOrder::UI, 1, 1, 0xff_ff0000)
 	end
 
-	def game_play
-		@background_image.draw(0,0,0)
-		message = Gosu::Image.from_text(self, "playing game", "sans-serif", 30, 2, 300, :center)
-		message.draw(250, 300, 1)
+	def play_game
+		@background_image.draw(0,0,ZOrder::Background, 1, 1, 0xaa_ffffff)
+		@money_message.draw("Money: £#{@player.money}", 10, 10, ZOrder::UI, 1, 1, 0xff_ffff00)
+
+		@deck_image.draw(30,200,ZOrder::Cards, 0.6, 0.6)
 	end
 
 	def update
@@ -38,7 +52,7 @@ class GameWindow < Gosu::Window
 		if !@game_running
 			title_screen
 		else
-			game_play
+			play_game
 		end
 	end
 

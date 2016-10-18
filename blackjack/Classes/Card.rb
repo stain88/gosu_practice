@@ -1,10 +1,11 @@
 class Card
 	attr_accessor :suit, :face, :value, :is_hidden
-	def initialize(suit, face)
+
+	def initialize(suit, face, is_hidden=false)
 		@suit = suit
 		@face = face
+		@is_hidden = is_hidden
 		@value = map_points(face)
-		@is_hidden = false
 	end
 
 	def map_points(face)
