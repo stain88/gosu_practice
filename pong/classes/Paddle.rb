@@ -3,7 +3,7 @@ class Paddle
 
 	def initialize
 		@image = Gosu::Image.new("media/images/paddle.png")
-		@x = @y = @vel_x = @vel_y = 0.0
+		@x = @y = @vel_y = 0.0
 	end
 
 	def warp(x,y)
@@ -17,7 +17,7 @@ class Paddle
 	def move
 		@y += @vel_y
 		@y = 0 if @y < 0
-		@y = (640 - @image.height) if (@y + @image.height) > 640
+		@y = (Constants::GAME_HEIGHT - @image.height) if (@y + @image.height) > Constants::GAME_HEIGHT
 
 		@vel_y *= 0.95
 	end

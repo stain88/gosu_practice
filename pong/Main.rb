@@ -1,10 +1,11 @@
 require 'gosu'
 require_relative 'modules/z_order'
-require_relative 'classes/paddle'
+require_relative 'modules/constants'
+require_relative 'classes/Paddle'
 
 class GameWindow < Gosu::Window
 	def initialize
-		super 860,640
+		super Constants::GAME_WIDTH, Constants::GAME_HEIGHT
 		self.caption = "Pong"
 
 		@background_image = Gosu::Image.new("media/images/background.png", :tileable => true)
@@ -29,7 +30,8 @@ class GameWindow < Gosu::Window
 	end
 
 	def button_down id
-		if id == Gosu::KbEscape
+		case id
+		when Gosu::KbEscape
 			close
 		end
 	end
