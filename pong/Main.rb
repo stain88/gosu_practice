@@ -1,4 +1,5 @@
 require 'gosu'
+require_relative 'modules/z_order'
 
 class GameWindow < Gosu::Window
 	def initialize
@@ -13,7 +14,7 @@ class GameWindow < Gosu::Window
 	end
 
 	def draw
-		@background_image.draw(0,0,0)
+		@background_image.draw(0,0,ZOrder::Background)
 	end
 
 	def button_down id
