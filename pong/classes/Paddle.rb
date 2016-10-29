@@ -17,7 +17,7 @@ class Paddle
 	def move
 		@y += @vel_y
 		@y = 0 if @y < 0
-		@y = (480 - @image.height) if (@y + @image.height) > 480
+		@y = (640 - @image.height) if (@y + @image.height) > 640
 
 		@vel_y *= 0.95
 	end
