@@ -2,6 +2,7 @@ require 'gosu'
 require_relative 'modules/z_order'
 require_relative 'modules/constants'
 require_relative 'classes/Paddle'
+require_relative 'classes/Ball'
 
 class GameWindow < Gosu::Window
 	def initialize
@@ -11,10 +12,13 @@ class GameWindow < Gosu::Window
 		@background_image = Gosu::Image.new("media/images/background.png", :tileable => true)
 
 		@player = Paddle.new
-		@player.warp(20, 270)
+		@player.warp(20, Constants::GAME_HEIGHT/2.0 - 50)
 
 		@enemy = Paddle.new
-		@enemy.warp(Constants::GAME_WIDTH - 40, 270)
+		@enemy.warp(Constants::GAME_WIDTH - 40, Constants::GAME_HEIGHT/2.0 - 50)
+
+		@ball = Ball.new
+		@ball.warp(Constants::GAME_WIDTH/2.0, Constants::GAME_HEIGHT/2.0)
 	end
 
 	def update
@@ -31,6 +35,7 @@ class GameWindow < Gosu::Window
 		@background_image.draw(0,0,ZOrder::Background)
 		@player.draw
 		@enemy.draw
+		@ball.draw
 	end
 
 	def button_down id
