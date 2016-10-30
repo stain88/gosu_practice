@@ -12,6 +12,9 @@ class GameWindow < Gosu::Window
 
 		@player = Paddle.new
 		@player.warp(20, 270)
+
+		@enemy = Paddle.new
+		@enemy.warp(Constants::GAME_WIDTH - 40, 270)
 	end
 
 	def update
@@ -27,6 +30,7 @@ class GameWindow < Gosu::Window
 	def draw
 		@background_image.draw(0,0,ZOrder::Background)
 		@player.draw
+		@enemy.draw
 	end
 
 	def button_down id
