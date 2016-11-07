@@ -9,8 +9,8 @@ class Ball
 	end
 
 	def accelerate
-		@vel_x += Gosu::offset_x(@angle, 0.5)
-		@vel_y += Gosu::offset_y(@angle, 0.5)
+		@vel_x += Gosu::offset_x(@angle, 4)
+		@vel_y += Gosu::offset_y(@angle, 3)
 	end
 
 	def move
@@ -22,5 +22,15 @@ class Ball
 
 	def draw
 		@image.draw(@x, @y, ZOrder::Ball)
+	end
+
+	def launch
+		@angle = (rand(120)+30)*[1,-1][rand(2)]
+		accelerate
+	end
+
+	def reset
+		@vel_x = @vel_y = @angle = 0.0
+		warp(Constants::GAME_WIDTH/2, Constants::GAME_HEIGHT/2)
 	end
 end

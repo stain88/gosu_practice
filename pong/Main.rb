@@ -19,6 +19,8 @@ class GameWindow < Gosu::Window
 
 		@ball = Ball.new
 		@ball.warp(Constants::GAME_WIDTH/2.0, Constants::GAME_HEIGHT/2.0)
+
+		@playing = false
 	end
 
 	def update
@@ -29,6 +31,7 @@ class GameWindow < Gosu::Window
 			@player.accelerate(1)
 		end
 		@player.move
+		@ball.move
 	end
 
 	def draw
@@ -40,6 +43,13 @@ class GameWindow < Gosu::Window
 
 	def button_down id
 		case id
+		when Gosu::KbSpace
+			if !@playing
+				@ball.launch
+			else
+				@ball.reset
+			end
+			@playing = !@playing
 		when Gosu::KbEscape
 			close
 		end
