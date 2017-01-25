@@ -6,6 +6,8 @@ class Indicator
 	DOWN = 'v'
 	STOP = '.'
 
+	UPDATE_DELAY = 0.4
+
 	def initialize(window)
 		@window = window
 		@cursor = STOP
@@ -13,7 +15,7 @@ class Indicator
 	end
 
 	def update
-		refresh_appearance
+		refresh_appearance if updateable?
 		@last_x, @last_y = @window.mouse_x, @window.mouse_y
 	end
 
@@ -39,5 +41,12 @@ class Indicator
 			end
 
 			@last_update = Time.now
+		end
+
+		def updateable?
+			return true if @cursor == STOP
+			now = Time.now
+			@last_update ||= now
+			now - @last_update > UPDATE_DELAY
 		end
 end
