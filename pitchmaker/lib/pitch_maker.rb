@@ -23,6 +23,7 @@ class PitchMaker < Gosu::Window
 
 	def update
 		@indicator.update
+		@tone.update if button_down?(Gosu::MsLeft) || button_down?(Gosu::MsRight)
 	end
 
 	def draw
@@ -48,6 +49,14 @@ class PitchMaker < Gosu::Window
 			puts "Mouse button up"
 			@tone.stop
 		end
+	end
+
+	def mouse_x_percent
+		mouse_x / WINDOW_WIDTH
+	end
+
+	def mouse_y_percent
+		mouse_y / WINDOW_HEIGHT
 	end
 
 	private

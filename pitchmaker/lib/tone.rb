@@ -20,16 +20,32 @@ class Tone
 		@instance.pause if playing?
 	end
 
+	def update
+		puts "V: #{volume}, S: #{speed}"
+		if playing?
+			@instance.volume = volume
+			@instance.speed = speed
+		end
+	end
+
 	def playing?
 		@instance && @instance.playing?
 	end
 
 	def volume
-		1
+		@window.mouse_x_percent
 	end
 
 	def speed
-		1
+		adjust_playback_speed(1.0 - @window.mouse_y_percent)
 	end
+
+	private
+
+		def adjust_playback_speed percent
+			base_speed = 1.0
+			top_speed = 2.0
+			base_speed + (percent * (top_speed - base_speed))
+		end
 
 end
