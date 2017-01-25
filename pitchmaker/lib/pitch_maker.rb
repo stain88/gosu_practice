@@ -1,6 +1,7 @@
 require 'gosu'
 
 require_relative('indicator')
+require_relative('tone')
 
 class PitchMaker < Gosu::Window
 
@@ -17,6 +18,7 @@ class PitchMaker < Gosu::Window
 
 		@font = Gosu::Font.new(self, Gosu::default_font_name, 20)
 		@indicator = Indicator.new(self)
+		@tone = Tone.new(self)
 	end
 
 	def update
@@ -36,6 +38,7 @@ class PitchMaker < Gosu::Window
 			close
 		when Gosu::MsLeft, Gosu::MsRight
 			puts "Mouse button down"
+			@tone.start
 		end
 	end
 
@@ -43,6 +46,7 @@ class PitchMaker < Gosu::Window
 		case id
 		when Gosu::MsLeft, Gosu::MsRight
 			puts "Mouse button up"
+			@tone.stop
 		end
 	end
 
