@@ -8,7 +8,7 @@ class Indicator
 
 	UPDATE_DELAY = 0.4
 
-	def initialize(window)
+	def initialize window
 		@window = window
 		@cursor = STOP
 		@last_x, @last_y = 0, 0

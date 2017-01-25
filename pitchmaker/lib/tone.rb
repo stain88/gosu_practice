@@ -2,7 +2,7 @@ class Tone
 
 	SOUND_FILE = '440Hz_for_5sec.wav'
 
-	def initialize(window)
+	def initialize window
 		@window = window
 		file_path = File.expand_path(File.join('sounds', SOUND_FILE))
 		@sample = Gosu::Sample.new(window, file_path)
@@ -37,7 +37,8 @@ class Tone
 	end
 
 	def speed
-		adjust_playback_speed(1.0 - @window.mouse_y_percent)
+		# adjust_playback_speed(1.0 - @window.mouse_y_percent)
+		Scale.pitch_from_percent(1.0 - @window.mouse_y_percent)
 	end
 
 	private

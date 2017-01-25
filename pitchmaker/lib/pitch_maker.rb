@@ -2,6 +2,7 @@ require 'gosu'
 
 require_relative('indicator')
 require_relative('tone')
+require_relative('scale')
 
 class PitchMaker < Gosu::Window
 
@@ -19,6 +20,7 @@ class PitchMaker < Gosu::Window
 		@font = Gosu::Font.new(self, Gosu::default_font_name, 20)
 		@indicator = Indicator.new(self)
 		@tone = Tone.new(self)
+		@scale = Scale.new(self)
 	end
 
 	def update
@@ -30,6 +32,7 @@ class PitchMaker < Gosu::Window
 		draw_background
 		display_instructions
 		@indicator.draw
+		@scale.draw
 	end
 
 	def button_down id
